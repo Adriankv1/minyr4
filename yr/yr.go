@@ -9,7 +9,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"github.com/Adriankv1/funtemps/conv"
+	//"github.com/Adriankv1/funtemps/conv"
 )
 
 // konverterer temperatur fra Celsius til Fahrenheit
@@ -179,4 +179,3 @@ func Average(unit string) (float64, error) {
 
 	return total / float64(count), nil
 }
-
