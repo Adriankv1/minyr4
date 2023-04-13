@@ -9,7 +9,8 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	/*"github.com/NorwegianKiwi-glitch/funtemps/conv"*/)
+	"github.com/Adriankv1/funtemps/conv"
+)
 
 // konverterer temperatur fra Celsius til Fahrenheit
 func celsiusToFahrenheit(celsius float64) float64 {
