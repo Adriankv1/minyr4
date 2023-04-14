@@ -4,60 +4,39 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/Adriankv1/minyr4/yr"
 )
 
 func main() {
-	// Venter på at brukeren skal skrive inn "minyr"
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Skriv inn 'minyr' for å starte programmet: ")
-	text, _ := reader.ReadString('\n')
-	if strings.ToLower(strings.TrimSpace(text)) != "minyr" {
-		fmt.Println("Ugyldig verdi.")
-		return
-	}
-
-	// Viser brukeren en meny med valg
-	fmt.Println("Valg:")
-	fmt.Println("  - 'convert' for å konvertere tempraturen fra Celsius til Fahrenheit")
-	fmt.Println("  - 'average' for å begregne gjennomsnitt tempratur for perioden")
-	fmt.Println("Skriv 'q' eller 'quit' for å avbryte.")
-	for {
-		fmt.Print("Velg: ")
-		option, _ := reader.ReadString('\n')
-		option = strings.ToLower(strings.TrimSpace(option))
-
-		if option == "convert" {
-			err := yr.Convert()
-			if err != nil {
-				fmt.Println("Feil med begregning av gjennomsnitt tempratur:", err)
-				return
+	var input string
+	scanner := bufio.NewScanner(os.Stdin)
+	fmt.Println("Venligst velg: ")
+	fmt.Println("  -   convert")
+	fmt.Println("  -   average")
+	fmt.Println("  -   q/exit")
+	for scanner.Scan() {
+		input = scanner.Text()
+		if input == "q" || input == "exit" {
+			fmt.Println("Avslutter programmet.")
+			os.Exit(0)
+		} else if input == "convert" {
+			fmt.Println("Konverterer alle målingene gitt i grader Celsius til grader Fahrenheit.")
+			// funksjon som åpner fil, leser linjer, gjør endringer og lagrer nye linjer i en ny fil
+			yr.ConvertTemperatures()
+			// flere else-if setninger
+		} else if input == "average" {
+			fmt.Println("Hva ønsker du å konvertere til? (C/F)")
+			scanner.Scan()
+			unit := scanner.Text()
+			if unit == "C" || unit == "c" {
+				yr.AverageTemperature("C")
+			} else if unit == "F" || unit == "f" {
+				yr.AverageTemperature("F")
+			} else {
+				fmt.Println("Ugyldig input.")
 			}
-			fmt.Println("Gjennomsnitt begregning fullført.")
-			break
+
 		}
-
-		if option == "average" {
-			fmt.Print("Velg enhet for begregning ('c' for Celsius eller 'f' for Fahrenheit): ")
-			unit, _ := reader.ReadString('\n')
-			unit = strings.ToLower(strings.TrimSpace(unit))
-
-			avg, err := yr.Average(unit)
-			if err != nil {
-				fmt.Println("Feil under kalkulasjon:", err)
-				return
-			}
-			fmt.Printf("Gjennomsnittlig tempratur: %.2f %s\n", avg, unit)
-			break
-		}
-
-		if option == "q" || option == "quit" {
-			fmt.Println("Avbryt program.")
-			return
-		}
-
-		fmt.Println("Ugylid verdi, prøv igjen.")
 	}
 }
