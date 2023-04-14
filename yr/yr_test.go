@@ -196,7 +196,7 @@ func TestConvertSisteLinje(t *testing.T) {
 	}
 
 	// Forventet output data
-	want := []string{"Data er gyldig per 18.03.2023 (CC BY 4.0)", "Meteorologisk institutt (MET)", "endringen er gjort av", "Vi The Thach"}
+	want := []string{"Data er gyldig per 18.03.2023 (CC BY 4.0)", "Meteorologisk institutt (MET)", "endringen er gjort av", "Adrian Viken"}
 
 	// Sjekk om linjen er lik det vi forventer
 	if !reflect.DeepEqual(lineToTest, want) {
