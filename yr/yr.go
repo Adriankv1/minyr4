@@ -8,8 +8,10 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	//"github.com/thevithach/funtemps/conv"
+	//"github.com/Adriankv1/funtemps/conv"
 )
+
+// konverterer celsius om til fahrenheit 'conv'
 
 func CelsiusToFahrenheit(celsius float64) float64 {
 	return celsius*9/5 + 32
